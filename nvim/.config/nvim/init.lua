@@ -34,6 +34,6 @@ require("lazy").setup("plugins", {
 
 -- Then load configurations
 require("options")
--- require("autocmds")
+require("autocmds")
 require("core.keymaps")
 require("consolelog")
