@@ -25,7 +25,9 @@ brew install \
   ripgrep \
   stow \
   yamllint \
-  nvm
+  nvm \
+  fzf \
+  bat
 
 npm install -g \
   jsonlint \

@@ -23,7 +23,7 @@ return {
 	require("plugins.nvim-tree"),
 
 	-- Fuzzy Finder
-	require("plugins.telescope"),
+	require("plugins.fzf-lua"),
 
 	-- LSP
 	require("plugins.lsp"),
