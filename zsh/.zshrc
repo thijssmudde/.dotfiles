@@ -25,6 +25,7 @@ plugins=(git docker docker-compose pnpm kubectl zsh-autosuggestions zsh-syntax-h
 source $ZSH/oh-my-zsh.sh
 
 # aliases
+alias m="glow"
 alias n="nvim ."
 alias vim="nvim ."
 alias ls="ls -al"
@@ -49,11 +50,13 @@ alias gtw="bun run generate-types:watch"
 alias ft="bun run format"
 alias grut="git fetch -p ; git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d" # removes untracked branches
 alias gcm="git checkout main"
+alias c="codex"
 
 # aliases for projects
 alias dotfiles="cd ~/.dotfiles/"
 alias projects="cd ~/projects/"
 alias progress="cd ~/projects/progressmade.ai/"
+alias copaco="cd ~/projects/copaco/"
 alias aaa="cd ~/projects/aaa && n ."
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -118,4 +121,6 @@ if [ -f '$HOME/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/Downloa
 # The next line enables shell command completion for gcloud.
 if [ -f '$HOME/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-alias claude="$HOME/.claude/local/claude"
+
+. "$HOME/.local/bin/env"
+export EDITOR=nvim

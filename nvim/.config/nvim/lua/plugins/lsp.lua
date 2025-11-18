@@ -10,15 +10,94 @@ return {
       priority = 1000, -- Make sure it loads early
       opts = {
         settings = {
-          -- Specify TSServer settings here
+          -- TSServer settings
+          tsserver_file_preferences = {
+            includeInlayParameterNameHints = "all",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+            importModuleSpecifierPreference = "shortest",
+            quotePreference = "auto",
+          },
+          tsserver_format_options = {
+            allowIncompleteCompletions = false,
+            allowRenameOfImportPath = false,
+          },
           typescript = {
             format = {
               indentSize = 2,
+              convertTabsToSpaces = true,
+              trimTrailingWhitespace = true,
+              insertSpaceAfterSemicolonInForStatements = true,
+              insertSpaceBeforeAndAfterBinaryOperators = true,
+              insertSpaceAfterCommaDelimiter = true,
+              insertSpaceAfterKeywordsInControlFlowStatements = true,
+              insertSpaceAfterFunctionKeywordForAnonymousFunctions = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
+              insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+              insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+              insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+              insertSpaceAfterTypeAssertion = false,
+              insertSpaceBeforeFunctionParenthesis = false,
+              placeOpenBraceOnNewLineForFunctions = false,
+              placeOpenBraceOnNewLineForControlBlocks = false,
+              insertSpaceBeforeTypeAnnotation = false,
+              indentMultiLineObjectLiteralBeginningOnBlankLine = false,
+              semicolons = "insert",
+            },
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
+          javascript = {
+            format = {
+              indentSize = 2,
+              convertTabsToSpaces = true,
+              trimTrailingWhitespace = true,
+              insertSpaceAfterSemicolonInForStatements = true,
+              insertSpaceBeforeAndAfterBinaryOperators = true,
+              insertSpaceAfterCommaDelimiter = true,
+              insertSpaceAfterKeywordsInControlFlowStatements = true,
+              insertSpaceAfterFunctionKeywordForAnonymousFunctions = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+              insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
+              insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+              insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+              insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+              insertSpaceAfterTypeAssertion = false,
+              insertSpaceBeforeFunctionParenthesis = false,
+              placeOpenBraceOnNewLineForFunctions = false,
+              placeOpenBraceOnNewLineForControlBlocks = false,
+              insertSpaceBeforeTypeAnnotation = false,
+              indentMultiLineObjectLiteralBeginningOnBlankLine = false,
+              semicolons = "insert",
+            },
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
             },
           },
           completions = {
             completeFunctionCalls = true,
           },
+          expose_as_code_action = "all",
         },
         on_attach = function(client, bufnr)
           -- keybind options
@@ -42,10 +121,13 @@ return {
         
           -- typescript specific keymaps (e.g. rename file and update imports)
           if client.name == "typescript-tools" then
-            vim.keymap.set("n", "<leader>mi", ":TypescriptAddMissingImports<CR>") -- 
-            vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
-            vim.keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports
-            vim.keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables
+            vim.keymap.set("n", "<leader>mi", ":TSToolsAddMissingImports<CR>", opts) -- add missing imports
+            vim.keymap.set("n", "<leader>rf", ":TSToolsRenameFile<CR>", opts) -- rename file and update imports
+            vim.keymap.set("n", "<leader>oi", ":TSToolsOrganizeImports<CR>", opts) -- organize imports
+            vim.keymap.set("n", "<leader>ru", ":TSToolsRemoveUnused<CR>", opts) -- remove unused variables
+            vim.keymap.set("n", "<leader>fx", ":TSToolsFixAll<CR>", opts) -- fix all auto-fixable problems
+            vim.keymap.set("n", "<leader>gs", ":TSToolsGoToSourceDefinition<CR>", opts) -- go to source definition
+            vim.keymap.set("n", "<leader>rF", ":TSToolsFileReferences<CR>", opts) -- find file references
           end
         end,
       },
