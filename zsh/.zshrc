@@ -51,6 +51,7 @@ alias ft="bun run format"
 alias grut="git fetch -p ; git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d" # removes untracked branches
 alias gcm="git checkout main"
 alias c="codex"
+alias dev='for p in thijssmudde agentreacher agentmrr brandreel glutenvrijadvies agentframer frasers copaco evolve; do tmux new-session -d -s $p -c ~/projects/$p; done; tmux attach -t agentreacher'
 
 # aliases for projects
 alias dotfiles="cd ~/.dotfiles/"
